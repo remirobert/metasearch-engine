@@ -5,6 +5,8 @@ import google_news
 import bing_news
 import yahoo_news
 import result
+from data import DataResult
+from printDebug import printResult
 
 def defaultParameter():
     return {'method': 'GET', 'headers': {}, 'data': {}, 'url': '', \
@@ -58,5 +60,17 @@ def bing_news_search(request):
     return data
 
 def searchNews(request):
-    print bing_news_search(request)
-    print yahoo_news_search(request)
+    dataGoogle = google_news_search(request)
+    dataYahoo = yahoo_news_search(request)
+
+    finalData = []
+    for i in dataGoogle:
+        data = DataResult(i["url"], 1, 0, 0)
+        data.addInformation(i["title"], i["content"])
+        finalData.append(data)
+
+    for currentYahooData in dataYahoo:
+        if len(currentYahooData) > 1:
+            data = DataResult(currentYahooData["url"], 1, 0, 0)
+            data.addInformation(currentYahooData["title"], currentYahooData["content"])
+            finalData.append(data)

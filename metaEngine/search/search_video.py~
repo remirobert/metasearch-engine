@@ -1,0 +1,15 @@
+import sys
+import requests
+sys.path.append("engine/")
+import google
+import bing
+import yahoo
+import result
+from search_news import searchNews
+
+def defaultParameter():
+    return {'method': 'GET', 'headers': {}, 'data': {}, 'url': '', \
+            'cookies': {}, 'language':'all'}
+
+
+def search_video(request):

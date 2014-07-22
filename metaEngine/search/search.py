@@ -6,6 +6,7 @@ import bing
 import yahoo
 import result
 from search_news import searchNews
+from search_video import search_video
 
 def defaultParameter():
     return {'method': 'GET', 'headers': {}, 'data': {}, 'url': '', \
@@ -55,5 +56,5 @@ def search(request):
     dataBing = bingSearch(request)
 
     searchNews(request)
-    
+    search_video(request)
     return result.parseResponse(dataGoogle, dataYahoo, dataBing)
