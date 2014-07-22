@@ -12,7 +12,12 @@ class DataResult(object):
         if rankYahoo == -1:
             rankYahoo = 1
         self.totalRank = rankGoogle + rankYahoo + rankBing
-    
+        if rankGoogle < rankBing and rankGoogle < rankYahoo:
+            self.engine = 0
+        elif rankYahoo < rankBing and rankYahoo < rankGoogle:
+            self.engine = 1
+        else:
+            self.engine = 2
 
     def addInformation(self, title, content):
         self.title = title

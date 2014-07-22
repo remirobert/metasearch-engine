@@ -18,14 +18,13 @@ def webSearch(keyword):
 @app.route('/')
 def home():
     print "call here"
-    return (render_template("index.html"))
+    return (render_template("index.html", dataResults=[]))
 
 @app.route('/', methods=['POST'])
 def my_form_post():
     research = request.form['text']
     resultSearch = search(research)
-    printResult(resultSearch)
-    return (render_template("index.html"))
+    return (render_template("index.html", dataResults=resultSearch))
 
 if __name__ == "__main__":
     app.run(debug=True)

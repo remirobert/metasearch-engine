@@ -49,6 +49,23 @@
 	  </form>	  
 	</div>
       </div>
+
+      {% for x in dataResults %}
+      </br>
+      <div class="demo-type-example">
+	<a href={{ x.url }}>
+	  <h5><span class="demo-heading-note"></span>{{ x.title }}</h5>
+	</a>
+      </div>
+      
+      <div class="demo-type-example">
+	<small><strong>{{ x.url }}</strong></small>
+      </div>
+      
+      <div class="demo-type-example">
+	<p><small>{{ x.content }}</small></p>
+      </div>
+      {% endfor %}
       
     </div> <!-- /container -->
     <!-- Load JS here for greater good =============================-->

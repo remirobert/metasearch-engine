@@ -24,8 +24,9 @@ def parse_url(url_string):
         endpos = url_string.rfind(ending)
         if endpos > -1:
             endpositions.append(endpos)
-
-    end = min(endpositions)
+    end = 0
+    if len(endpositions) > 0:
+        end = min(endpositions)
     return unquote(url_string[start:end])
 
 

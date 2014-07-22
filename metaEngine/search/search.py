@@ -5,6 +5,7 @@ import google
 import bing
 import yahoo
 import result
+from search_news import searchNews
 
 def defaultParameter():
     return {'method': 'GET', 'headers': {}, 'data': {}, 'url': '', \
@@ -52,4 +53,7 @@ def search(request):
     dataGoogle = googleSearch(request)
     dataYahoo = yahooSearch(request)
     dataBing = bingSearch(request)
+
+    searchNews(request)
+    
     return result.parseResponse(dataGoogle, dataYahoo, dataBing)
