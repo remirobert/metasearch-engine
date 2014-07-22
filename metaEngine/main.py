@@ -14,6 +14,5 @@ from printDebug import printResult
 
 if __name__ == "__main__":
   
-  resultSearch = search("iphone")
-  printResult(resultSearch)
-  
+  resultSearch = search("")
+  printResult(resultSearch)  
