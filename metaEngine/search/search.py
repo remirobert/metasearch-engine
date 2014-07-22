@@ -7,6 +7,8 @@ import yahoo
 import result
 from search_news import searchNews
 from search_video import search_video
+from search_images import search_image
+from search_torrent import search_torrent
 
 def defaultParameter():
     return {'method': 'GET', 'headers': {}, 'data': {}, 'url': '', \
@@ -15,7 +17,7 @@ def defaultParameter():
 def googleSearch(request):
     data = None
     param = defaultParameter()
-    param['pageno'] = 10
+    param['pageno'] = 0
     try:
         ret = google.request(request, param)
         r = requests.get(ret['url'])
@@ -55,6 +57,5 @@ def search(request):
     dataYahoo = yahooSearch(request)
     dataBing = bingSearch(request)
 
-    searchNews(request)
-    search_video(request)
+    search_torrent(request)
     return result.parseResponse(dataGoogle, dataYahoo, dataBing)
