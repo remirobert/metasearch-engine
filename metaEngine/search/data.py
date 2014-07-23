@@ -19,6 +19,7 @@ class DataResult(object):
         else:
             self.engine = 2
 
-    def addInformation(self, title, content):
+    def addInformation(self, title, content, date=None):
         self.title = title
         self.content = content
+        self.date = date

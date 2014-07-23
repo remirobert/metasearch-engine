@@ -19,14 +19,19 @@ def parseGoogleLink(urlsGoogle, urlsYahoo, urlsBing, currentGoogleRank, \
         rankYahoo = -1
         rankBing = -1
         index = 0
+
+        if currentGoogleUrl == None or currentGoogleUrl == "":
+            return 0
         for currentYahooUrl in urlsYahoo:
-            if currentGoogleUrl.split("//")[1] == currentYahooUrl.split("//")[1]:
+            if currentYahooUrl != None and currentYahooUrl != "" and \
+               currentGoogleUrl.split("//")[1] == currentYahooUrl.split("//")[1]:
                 rankYahoo = index
                 break
             index += 1
         index = 0
         for currentBingUrl in urlsBing:
-            if currentGoogleUrl.split("//")[1] == currentBingUrl.split("//")[1]:
+            if currentBingUrl != None and currentBingUrl != "" and \
+               currentGoogleUrl.split("//")[1] == currentBingUrl.split("//")[1]:
                 rankBing = index
                 break
             index += 1

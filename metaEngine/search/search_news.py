@@ -66,11 +66,19 @@ def searchNews(request):
     finalData = []
     for i in dataGoogle:
         data = DataResult(i["url"], 1, 0, 0)
-        data.addInformation(i["title"], i["content"])
+        data.addInformation(i["title"], i["content"], i["publishedDate"])
         finalData.append(data)
 
     for currentYahooData in dataYahoo:
         if len(currentYahooData) > 1:
             data = DataResult(currentYahooData["url"], 1, 0, 0)
-            data.addInformation(currentYahooData["title"], currentYahooData["content"])
+            data.addInformation(currentYahooData["title"], \
+                                currentYahooData["content"], \
+                                currentYahooData["publishedDate"])
             finalData.append(data)
+
+    for i in finalData:
+        print i.date
+        #print i['publishedDate']
+    return finalData
+

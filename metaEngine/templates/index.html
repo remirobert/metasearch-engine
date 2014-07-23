@@ -1,56 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
   <head>
-    <meta charset="utf-8">
-    <title>Flat UI - Free Bootstrap Framework and Themes</title>
-    <meta name="description" content="Flat UI Kit Free is a Twitter Bootstrap Framework design and Theme, this responsive framework includes a PSD and HTML version."/>
+    <meta charset="UTF-8">
+    <title>Phichichi</title>
 
-    <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700|Roboto:400,100,300,500,700,900&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
-    <!-- Loading Bootstrap -->
-    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}"  rel="stylesheet">
-
-    <!-- Loading Flat UI -->
-    <link href="{{ url_for('static', filename='css/flat-ui.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/demo.css') }}" rel="stylesheet">
-
-    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
-    <!--[if lt IE 9]>
-	<script src="js/html5shiv.js"></script>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pichichi.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   </head>
+
   <body>
 
-
-    <div class="container">
-      <div class="row">
-	<div class"col-md-12">
-	  <div class="demo-headline">
-            <h1 class="demo-logo">
-              <div class="logo"></div>
-              Search Engine
-              <small>blabla</small>
-            </h1>
-	  </div> <!-- /demo-headline -->
-      
-
-	  <form action="." method="POST">
-	    <div class="form-group">
-              <div class="input-group">
-		<input class="form-control" id="navbarInput-01" type="search" placeholder="Search" placeholder="Prepend" name="text">
-		<span class="input-group-btn">
-		  <input type="submit" class="btn" name="my-form" value="Send">
-		</span>            
-              </div>
-	    </div> 
-	  </form>	  
-	</div>
+    <div class="cbp-af-header">
+      <div class="cbp-af-inner">
+	<h1>Pichichi</h1>
       </div>
+    </div>
+    
+    
+    
+    <div id="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas congue gravida. Cras semper lacus in elit sagittis, nec porta nibh posuere. Phasellus consectetur tempus pharetra. In aliquet pellentesque risus, vel posuere lacus vulputate vitae. Nulla laoreet orci ac tellus aliquam, et mattis odio suscipit.
+    </div>
+    
+    <div class="container">
+      <form class="search_form" action="." method="POST" class="search">
+	<input type="text" spellcheck="false" autocomplete="off" autocapitalize="off" autocorrect="off" name="text" class="search" id="search" placeholder="Search" />
+	.&nbsp;<select name="tld">
+	  <option value="search">&nbsp;Search</option>
+	  <option value="images">&nbsp;Images</option>
+	  <option value="news">&nbsp;news</option>
+	  <option value="videos">&nbsp;Videos</option>
+	  <option value="torrent">&nbsp;Torrent</option>
+	</select>
+	<button class="search_submit" value="true" type="submit">Search</button>
+      </form>	
+    </div>
 
-      {% for x in dataResults %}
+    {% if type == 1 %}
+      <div class="cbp-af-inner">
+	<h1>Search</h1>
+    </div>
+    {% for x in dataResults %}
       </br>
       <div class="demo-type-example">
 	<a href={{ x.url }}>
@@ -66,21 +59,67 @@
 	<p><small>{{ x.content }}</small></p>
       </div>
       {% endfor %}
+      {% endif %}
+
+      {% if type == 2 %}
+      <div class="cbp-af-inner">
+	<h1>News</h1>
+      </div>
+      {% for x in dataResults %}
+      </br>
+      <img src={{ x["img_src"] }}>
+      {% endfor %}
+      {% endif %}
+
+      {% if type == 3 %}
+      <div class="cbp-af-inner">
+	<h1>News</h1>
+      </div>
+      {% for x in dataResults %}
+      </br>
+      <div class="demo-type-example">
+	<a href={{ x.url }}>
+	  <h5><span class="demo-heading-note"></span>{{ x.title }}</h5>
+	</a>
+      </div>
+
+      <p>{{ x.date }}</p>
       
-    </div> <!-- /container -->
-    <!-- Load JS here for greater good =============================-->
-    <script src="js/jquery-1.8.3.min.js"></script>
-    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
-    <script src="js/jquery.ui.touch-punch.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-select.js"></script>
-    <script src="js/bootstrap-switch.js"></script>
-    <script src="js/flatui-checkbox.js"></script>
-    <script src="js/flatui-radio.js"></script>
-    <script src="js/jquery.tagsinput.js"></script>
-    <script src="js/jquery.placeholder.js"></script>
-    <script src="js/jquery.stacktable.js"></script>
-    <script src="http://vjs.zencdn.net/4.3/video.js"></script>
-    <script src="js/application.js"></script>
+      <div class="demo-type-example">
+	<small><strong>{{ x.url }}</strong></small>
+      </div>
+      
+      <div class="demo-type-example">
+	<p><small>{{ x.content }}</small></p>
+      </div>
+      {% endfor %}
+      {% endif %}
+
+
+      <footer>
+      FOOTER
+      
+      <div id="footersocial">
+	<ul style="list-style:none; padding: 0px; margin: 0px; font-size: 29px;">
+	  <li class="zocial-twitter"></li>
+	  <li class="zocial-facebook"></li>
+	  <li class="zocial-github"></li>
+	  <li class="zocial-instagram"></li>
+	  <li class="zocial-dribbble"></li>
+	  <li class="zocial-evernote"></li>
+	  <li class="zocial-linkedin"></li>
+	  <li class="zocial-pinterest"></li>
+	  <li class="zocial-google"></li>
+	  <li class="zocial-youtube"></li>
+	  <li class="zocial-flickr"></li>
+	  <li class="zocial-lastfm"></li>
+	  <li class="zocial-reddit"></li>
+	</ul>
+      </div>
+      
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/classie.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cbpAnimatedHeader.min.js') }}"></script>
   </body>
 </html>

@@ -20,3 +20,9 @@ def pushInformationInData(classRank, dataGoogle, dataYahoo, dataBing):
         return
     for currentRank in classRank:
         listDataPerRank(currentRank, dataGoogle, dataYahoo, dataBing)
+
+
+def cleanInformation(data):
+    for currentData in data:
+        if len(currentData) == 1 or currentData == None or currentData["url"] == "":
+            data.remove(currentData)

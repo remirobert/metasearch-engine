@@ -9,6 +9,7 @@ from search_news import searchNews
 from search_video import search_video
 from search_images import search_image
 from search_torrent import search_torrent
+from information import cleanInformation
 
 def defaultParameter():
     return {'method': 'GET', 'headers': {}, 'data': {}, 'url': '', \
@@ -56,6 +57,7 @@ def search(request):
     dataGoogle = googleSearch(request)
     dataYahoo = yahooSearch(request)
     dataBing = bingSearch(request)
-
-    search_torrent(request)
+    cleanInformation(dataGoogle)
+    cleanInformation(dataYahoo)
+    cleanInformation(dataBing)
     return result.parseResponse(dataGoogle, dataYahoo, dataBing)
