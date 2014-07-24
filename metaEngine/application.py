@@ -9,6 +9,7 @@ from search import search
 from search_news import searchNews
 from search_images import search_image
 from search_video import search_video
+from search_torrent import search_torrent
 from printDebug import printResult
 
 app = Flask(__name__)
@@ -29,18 +30,21 @@ def my_form_post():
     data_type = 0
     resultSearch = []
 
-    if request.form['tld'] == "search":
+    if request.form['platform'] == "search":
         resultSearch = search(keyword)
         data_type = 1
-    elif request.form['tld'] == "images":
+    elif request.form['platform'] == "images":
         resultSearch = search_image(keyword)
         data_type = 2    
-    elif request.form['tld'] == "news":
+    elif request.form['platform'] == "news":
         resultSearch = searchNews(keyword)
         data_type = 3
-    elif request.form['tld'] == "videos":
+    elif request.form['platform'] == "videos":
         resultSearch = search_video(keyword)
         data_type = 4
+    elif request.form['platform'] == "torrent":
+        resultSearch = search_torrent(keyword)
+        data_type = 5
 
     if resultSearch != None:
         return (render_template("index.html", type=data_type, dataResults=resultSearch))

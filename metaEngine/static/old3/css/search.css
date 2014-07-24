@@ -43,26 +43,24 @@
 
 body {
     font-family: 'Lato', Calibri, Arial, sans-serif;
-    color: #00B1FF;
-    background: #3A4057;
     font-weight: 300;
     overflow-x: hidden;
 }
 
 .container{
 	max-width: 960px;
-	margin: 14em auto;
+	margin: 5em auto;
 	width: 80%;
 }
 
 a {
-	color: #888;
+    //color: #888;
 	text-decoration: none;
 }
 
 a:hover,
 a:active {
-	color: #333;
+    color: #333;
 }
 
 strong{
@@ -70,9 +68,9 @@ strong{
 }
 
 hr{
-	clear:both;
-	margin-top: 5em;
-	border: 0;
+    clear:both;
+    margin-top: 5em;
+    border: 0;
     height: 0;
     border-top: 2px solid rgba(0, 0, 0, 0.1);
     margin: 1em 0;
@@ -136,7 +134,7 @@ input[type=checkbox] + label:after{
 input[type=checkbox]:checked + label {
 	background-color: #d2f6dc;
 	border-color: #55aa4f;
-	color: #55aa4f;
+	//color: #55aa4f;
 	opacity: 1;
 }
 
@@ -157,9 +155,9 @@ form{
 }
 
 form input[type="text"] {
-	color: #fff;
+	color: #000;
 	cursor:pointer;
-	outline: 0;
+	outline: none;
 	width: 60%;
 	height: 1.3em;
 	/*padding: .5em 0em;*/
@@ -167,14 +165,14 @@ form input[type="text"] {
 	font-family: inherit;
 	background-color:transparent;
 	border: 0px solid;
-	border-bottom: 1px dashed #9FC8CE;
+	border-bottom: 1px dashed #000;
 	}
 form input[type="text"]:hover{
-	color: #fff;
+	color: #OOO;
 }
 
 form input[type="text"]:focus{
-	color: #fff;
+	color: #OOO;
 }
 
 form select {
@@ -186,7 +184,7 @@ form select {
 	background: transparent;
 	font-family: inherit;
 	//font-size: inherit;
-	color: inherit;
+	//color: inherit;
 	font-weight: inherit;
 	/*line-height: inherit;*/
 	display: inline-block;
@@ -198,7 +196,7 @@ form select {
 }
 
 form select:hover{
-	color: #fff;
+	color: #000;
 }
 
 .saved button {

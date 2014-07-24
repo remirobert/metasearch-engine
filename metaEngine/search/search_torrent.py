@@ -21,4 +21,5 @@ def piratebay_search(request):
     return data
 
 def search_torrent(request):
-    print piratebay_search(request)
+    return piratebay_search(request)
+    

@@ -13,7 +13,7 @@ paging = True
 def request(query, params):
     index = (params['pageno'] - 1) * 25 + 1
     params['url'] = search_url.format(query=urlencode({'q': query}),
-                                      index=index)
+                                      index=1)
     return params
 
 

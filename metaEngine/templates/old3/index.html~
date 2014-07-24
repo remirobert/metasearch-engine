@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Landy - Parallax App Landing Page</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- CSS 
+        ================================================== -->
+    <!-- Bootstrap 3-->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic|Roboto+Condensed:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+    <!-- Template Styles -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" media="screen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      </head>
+  <body>
+	  	  
+	  
+	   <!-- HEADER
+	   ================================================== -->	  
+	   <header>
+	     <div class="container">
+	       <div class="row">
+		 <div class="col-md-12">
+		   <h1>Hello World!</h1>
+		   <p class="lead">This is an Awesome App Landing Page</p>
+		   
+		   <div class="container">
+		     <form class="search_form" action="." method="POST" class="search">
+		       <input type="text" spellcheck="false" autocomplete="off" autocapitalize="off" autocorrect="off" name="text" class="search" id="search" placeholder="Search" />
+		       .&nbsp;<select name="tld">
+			 <option value="search">&nbsp;Search</option>
+			 <option value="images">&nbsp;Images</option>
+			 <option value="news">&nbsp;news</option>
+			 <option value="videos">&nbsp;Videos</option>
+			 <option value="torrent">&nbsp;Torrent</option>
+		       </select>
+		       <button class="search_submit" value="true" type="submit">Search</button>
+		     </form>	
+		   </div>
+
+		 </div>	  
+	       </div>    
+	     </div>
+	   </header>
+	   	  
+	  <!-- DETAILS 
+	      ================================================== -->
+	  <section class="detail">
+	    <div class="container">
+	      <div class="row">
+		<div class="col-md-12">
+		  <div id="carousel-example-generic-2" class="carousel slide">
+
+		    {% if type == 1 %}
+		    {% for x in dataResults %}
+		    <div class="item active">
+		      <div class="row">		    
+			<div class="col-sm-12">
+			  <a href={{ x.url }}>
+			    <h2>{{ x.title }}</h2>
+			  </a>
+			  <p>{{ x.content }}</p>
+			</div>
+		      </div>
+		    </div>
+		    {% endfor %}
+		    {% endif %}
+
+		    {% if type == 2 %}
+		    {% for x in dataResults %}
+		    <div class="item active col-xs-6 col-sm-3">
+		      <div class="row">
+			<div class="col-md-4">
+			  <a href={{ x["url"] }}>
+			     <img src={{ x["img_src"] }} style="max-width:100%; width:100px;">
+			  </a>
+			</div>
+		      </div>
+		    </div>
+		    {% endfor %}
+		    {% endif %}
+
+
+
+		  </div>
+		</div>
+	      </div>
+	    </div>
+	  </section>
+	  
+	  
+	  <!-- FEATURES
+	       ================================================== -->
+	  <section class="features">
+	    <div class="container">
+			  <div class="row">
+				
+				  <div class="col-md-4">
+					  <div class="circle"><i class="icon-bookmark"></i></div>
+					  <h2>Quick &amp; Easy Setup</h2>
+					  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+				  </div>
+				
+				  <div class="col-md-4">
+					  <div class="circle"><i class="icon-keypad"></i></div>
+					  <h2>Parallax Scrolling</h2>
+					  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+				  </div>
+				 
+				  <div class="col-md-4">
+					  <div class="circle"><i class="icon-like"></i></div>
+					  <h2>Responsive Design</h2>
+					  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+				  </div>
+				  
+			  </div>
+		  </div>
+	  </section>
+	  
+	  
+	
+	 <!-- GET IT 
+	     ================================================== -->
+	  <section class="get-it">
+	  	<div class="container">
+	  		<div class="row">
+	  			<div class="col-md-12">
+	  				<h1>Avaialable now on the App Store</h1>
+	  				<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+	  				<button type="button" class="app-store"></button>
+	  			</div>
+	  			<div class="col-md-12">
+	  				<hr />
+		  			<ul>
+	                	<li><a href="#link-here">Contact</a></li>
+	                	<li><a href="#link-here">Twitter</a></li>
+	                	<li><a href="#link-here">Press</a></li>
+	                	<li><a href="#link-here">Support</a></li>
+	                	<li><a href="#link-here">Developers</a></li>
+	                	<li><a href="#link-here">Privacy</a></li>
+                	</ul>
+	  			</div>
+	  		</div>
+	  	</div>
+	  </section>
+	  
+	 
+	 <!-- JAVASCRIPT
+	     ================================================== -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/animatescroll.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/retina-1.1.0.min.js') }}"></script>
+  	
+</html>

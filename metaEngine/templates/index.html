@@ -1,125 +1,147 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Phichichi</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>SuperThemes - Premium themes search engine</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="The search engine that provides you the best premium themes for your website (Wordpress, Magento, ...)" />
 
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700|Roboto:400,100,300,500,700,900&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<!-- SEO -->
+<meta property="og:image" content="http://superthemes.com/img/ui/fb.jpg" />
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/pichichi.css') }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  </head>
+<!-- Bootstrap -->
+<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/bootstrap-responsive.css') }}" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <body>
+<!-- Custom CSS -->
+<link href="{{ url_for('static', filename='css/general-v=.0.1.css') }}" rel="stylesheet">
 
-    <div class="cbp-af-header">
-      <div class="cbp-af-inner">
-	<h1>Pichichi</h1>
-      </div>
+<!-- Favicon -->
+<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+
+<!-- Javascript -->
+<script type="text/javascript">
+    </script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.2.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/rating.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/pages.home.js') }}"></script>
+<script type="text/javascript">
+var url_base = 'http://superthemes.com/';
+var sub_url_base = 'http://superthemes.com/';
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36427948-1']);
+  _gaq.push(['_setDomainName', 'superthemes.com']);
+  _gaq.push(['_trackPageview']);
+
+  
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+<body id="homepage">
+
+
+  <div class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar-inner">
+        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li><a href="index.html">Home</a></li>
+          </ul>
+        </div>
     </div>
-    
-    
-    
-    <div id="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas congue gravida. Cras semper lacus in elit sagittis, nec porta nibh posuere. Phasellus consectetur tempus pharetra. In aliquet pellentesque risus, vel posuere lacus vulputate vitae. Nulla laoreet orci ac tellus aliquam, et mattis odio suscipit.
+  </div>
+
+
+<div class="main" id="global">
+  <div class="container">
+    <div id="home-logo">
+    	<div id="logo-box">
+  	    <h1><a href="index.html" title="SuperThemes - Your search engine to find premium themes">SuperThemes - Premium themes</a></h1>  	
+  	  </div>
     </div>
-    
-    <div class="container">
-      <form class="search_form" action="." method="POST" class="search">
-	<input type="text" spellcheck="false" autocomplete="off" autocapitalize="off" autocorrect="off" name="text" class="search" id="search" placeholder="Search" />
-	.&nbsp;<select name="tld">
-	  <option value="search">&nbsp;Search</option>
-	  <option value="images">&nbsp;Images</option>
-	  <option value="news">&nbsp;news</option>
-	  <option value="videos">&nbsp;Videos</option>
-	  <option value="torrent">&nbsp;Torrent</option>
-	</select>
-	<button class="search_submit" value="true" type="submit">Search</button>
-      </form>	
+    <div class="row-fluid" id="home-search">
+      <form action="." method="POST">
+        <input type="text" placeholder="Type your keywords…" name="text" value="" id="home-input">
+
+        <!-- Platform selection -->
+        <a href="javascript:;" id="home-select"><span>search</span></a>
+	
+        <div id="home-platforms">
+          <div>
+            <p>Choose a kind of a search</p>
+            <ul>
+              <li>
+                <a href="phpbb/index.html" title="search" data-platform="search" data-platform-name="search">
+                  Search                </a>
+              </li>
+              <li>
+                <a href="prestashop/index.html" title="images" data-platform="images" data-platform-name="images">
+                  Images                </a>
+              </li>
+              <li>
+                <a href="shopify/index.html" title="news" data-platform="news" data-platform-name="news">
+                  News                </a>
+              </li>
+              <li>
+                <a href="tumblr/index.html" title="videos" data-platform="videos" data-platform-name="videos">
+                  Videos                </a>
+              </li>
+              <li>
+                <a href="vbulletin/index.html" title="torrent" data-platform="torrent" data-platform-name="torrent">
+                  Torrent                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <input type="hidden" name="platform" value="search"/>
+
+        <!-- Search buttons -->
+        <div id="search-buttons">
+          <button type="submit" value="true" class="go"><span><i></i>Search</span></button>
+    	</div>
+      </form>
     </div>
 
     {% if type == 1 %}
-      <div class="cbp-af-inner">
-	<h1>Search</h1>
-    </div>
     {% for x in dataResults %}
-      </br>
-      <div class="demo-type-example">
-	<a href={{ x.url }}>
-	  <h5><span class="demo-heading-note"></span>{{ x.title }}</h5>
-	</a>
+    <div class="item active">
+      <div class="row">		    
+	<div class="col-sm-12">
+	  <a href={{ x.url }}>
+	    <p class="title">{{ x.title }}</p>
+	  </a>
+	  <p>{{ x.content }}</p>
+	</div>
       </div>
-      
-      <div class="demo-type-example">
-	<small><strong>{{ x.url }}</strong></small>
-      </div>
-      
-      <div class="demo-type-example">
-	<p><small>{{ x.content }}</small></p>
-      </div>
-      {% endfor %}
-      {% endif %}
+    </div>
+    {% endfor %}
+    {% endif %}
 
-      {% if type == 2 %}
-      <div class="cbp-af-inner">
-	<h1>News</h1>
-      </div>
-      {% for x in dataResults %}
-      </br>
-      <img src={{ x["img_src"] }}>
-      {% endfor %}
-      {% endif %}
+<form method="post" action="http://wordpress.superthemes.com/ajax-request/main/newsletter/" id="newsletter_form" class="nl-form">
+    <p class="title">Newsletter</p>
+    <div id="nl_message" class="hidden alert alert-error">You must set an email in order to subscribe to the newsletter.</div>
 
-      {% if type == 3 %}
-      <div class="cbp-af-inner">
-	<h1>News</h1>
-      </div>
-      {% for x in dataResults %}
-      </br>
-      <div class="demo-type-example">
-	<a href={{ x.url }}>
-	  <h5><span class="demo-heading-note"></span>{{ x.title }}</h5>
-	</a>
-      </div>
-
-      <p>{{ x.date }}</p>
-      
-      <div class="demo-type-example">
-	<small><strong>{{ x.url }}</strong></small>
-      </div>
-      
-      <div class="demo-type-example">
-	<p><small>{{ x.content }}</small></p>
-      </div>
-      {% endfor %}
-      {% endif %}
+    <div class='row-fluid'>  
+      Updates from the SuperThemes galaxy - new themes, discounts, development news, etc.
+    </div>
+   <div class='clearfix'></div>
+</form> 
 
 
-      <footer>
-      FOOTER
-      
-      <div id="footersocial">
-	<ul style="list-style:none; padding: 0px; margin: 0px; font-size: 29px;">
-	  <li class="zocial-twitter"></li>
-	  <li class="zocial-facebook"></li>
-	  <li class="zocial-github"></li>
-	  <li class="zocial-instagram"></li>
-	  <li class="zocial-dribbble"></li>
-	  <li class="zocial-evernote"></li>
-	  <li class="zocial-linkedin"></li>
-	  <li class="zocial-pinterest"></li>
-	  <li class="zocial-google"></li>
-	  <li class="zocial-youtube"></li>
-	  <li class="zocial-flickr"></li>
-	  <li class="zocial-lastfm"></li>
-	  <li class="zocial-reddit"></li>
-	</ul>
-      </div>
-      
-    </footer>
 
-    <script src="{{ url_for('static', filename='js/classie.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/cbpAnimatedHeader.min.js') }}"></script>
-  </body>
+  </div>
+
+</div>  
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/retina.js') }}"></script>
+</body>
 </html>
+<!-- Localized -->
