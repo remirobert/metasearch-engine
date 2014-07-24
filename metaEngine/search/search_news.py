@@ -14,48 +14,38 @@ def defaultParameter():
 
 
 def google_news_search(request):
-    data = None
+    data = []
     param = defaultParameter()
     param['pageno'] = 10
     try:
         ret = google_news.request(request, param)
         r = requests.get(ret['url'])
     except:
-        return None
+        return []
     data = google_news.response(r)
     return data
 
 def yahoo_news_search(request):
-    data = None
+    data = []
     param = defaultParameter()
     param['pageno'] = 10
     try:
         ret = yahoo_news.request(request, param)
-        print ret["url"]
         r = requests.get(ret['url'])
     except:
-        print "Errror get google news"
-        return None
-
-    print r
-    
+        return []
     data = yahoo_news.response(r)
     return data
 
 def bing_news_search(request):
-    data = None
+    data = []
     param = defaultParameter()
     param['pageno'] = 10
     try:
         ret = bing_news.request(request, param)
-        print ret["url"]
         r = requests.get(ret['url'])
     except:
-        print "Errror get google news"
-        return None
-
-    print r
-    
+        return []
     data = bing_news.response(r)
     return data
 
@@ -65,20 +55,20 @@ def searchNews(request):
 
     finalData = []
     for i in dataGoogle:
-        data = DataResult(i["url"], 1, 0, 0)
-        data.addInformation(i["title"], i["content"], i["publishedDate"])
-        finalData.append(data)
+        current_dict = {}
+        current_dict["url"] = i["url"]
+        current_dict["title"] = i["title"]
+        current_dict["content"] = i["content"]
+        current_dict["date"] = i["publishedDate"]
+        finalData.append(current_dict)
 
-    for currentYahooData in dataYahoo:
-        if len(currentYahooData) > 1:
-            data = DataResult(currentYahooData["url"], 1, 0, 0)
-            data.addInformation(currentYahooData["title"], \
-                                currentYahooData["content"], \
-                                currentYahooData["publishedDate"])
-            finalData.append(data)
-
-    for i in finalData:
-        print i.date
-        #print i['publishedDate']
+    for i in dataYahoo:
+        if len(i) > 1:
+            current_dict = {}
+            current_dict["url"] = i["url"]
+            current_dict["title"] = i["title"]
+            current_dict["content"] = i["content"]
+            current_dict["date"] = i["publishedDate"]
+            finalData.append(current_dict)
     return finalData
 

@@ -11,8 +11,10 @@ from search_images import search_image
 from search_video import search_video
 from search_torrent import search_torrent
 from printDebug import printResult
+import manage_database
 
 app = Flask(__name__)
+conn = None
 
 @app.route('/api/web-search/<keyword>')
 def webSearch(keyword):
@@ -30,20 +32,41 @@ def my_form_post():
     data_type = 0
     resultSearch = []
 
+    conn = manage_database.connect_database()
+    data_ret = manage_database.search_word(conn, keyword, request.form['platform'])
+
+    if data_ret == None:
+        search_results = search(keyword)
+        image_search = search_image(keyword)
+        news_results = searchNews(keyword)
+        videos_search = search_video(keyword)
+        torrent_search = search_torrent(keyword)
+        print torrent_search
+        manage_database.fill_new_entry(conn, keyword, search_results, image_search, \
+                                       news_results, videos_search, torrent_search)
+    else:
+        resultSearch = data_ret
+
+    conn.close()
     if request.form['platform'] == "search":
-        resultSearch = search(keyword)
+        if data_ret == None:
+            resultSearch = search_results
         data_type = 1
     elif request.form['platform'] == "images":
-        resultSearch = search_image(keyword)
+        if data_ret == None:
+            resultSearch = image_search
         data_type = 2    
     elif request.form['platform'] == "news":
-        resultSearch = searchNews(keyword)
+        if data_ret == None:
+            resultSearch = news_results
         data_type = 3
     elif request.form['platform'] == "videos":
-        resultSearch = search_video(keyword)
+        if data_ret == None:
+            resultSearch = videos_search
         data_type = 4
     elif request.form['platform'] == "torrent":
-        resultSearch = search_torrent(keyword)
+        if data_ret == None:
+            resultSearch = torrent_search
         data_type = 5
 
     if resultSearch != None:

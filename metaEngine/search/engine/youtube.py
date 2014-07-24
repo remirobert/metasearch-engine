@@ -22,38 +22,44 @@ def response(resp):
     search_results = loads(resp.text)
     if not 'feed' in search_results:
         return results
+
     feed = search_results['feed']
 
-    for result in feed['entry']:
-        url = [x['href'] for x in result['link'] if x['type'] == 'text/html']
-        if not url:
-            return
-        # remove tracking
-        url = url[0].replace('feature=youtube_gdata', '')
-        if url.endswith('&'):
-            url = url[:-1]
-        title = result['title']['$t']
-        content = ''
-        thumbnail = ''
+    if "entry" in feed == False:
+        return []    
+    
+    try:
+        for result in feed['entry']:
+            url = [x['href'] for x in result['link'] if x['type'] == 'text/html']
+            if not url:
+                return
+            # remove tracking
+            url = url[0].replace('feature=youtube_gdata', '')
+            if url.endswith('&'):
+                url = url[:-1]
+            title = result['title']['$t']
+            content = ''
+            thumbnail = ''
 
-#"2013-12-31T15:22:51.000Z"
-        pubdate = result['published']['$t']
-        publishedDate = parser.parse(pubdate)
 
-        if result['media$group']['media$thumbnail']:
-            thumbnail = result['media$group']['media$thumbnail'][0]['url']
-            content += '<a href="{0}" title="{0}" ><img src="{1}" /></a>'.format(url, thumbnail)  # noqa
+            pubdate = result['published']['$t']
+            publishedDate = parser.parse(pubdate)
 
-        if content:
-            content += '<br />' + result['content']['$t']
-        else:
-            content = result['content']['$t']
+            if result['media$group']['media$thumbnail']:
+                thumbnail = result['media$group']['media$thumbnail'][0]['url']
+                content += '<a href="{0}" title="{0}" ><img src="{1}" /></a>'.format(url, thumbnail)  # noqa
 
-        results.append({'url': url,
-                        'title': title,
-                        'content': content,
-                        'template': 'videos.html',
-                        'publishedDate': publishedDate,
-                        'thumbnail': thumbnail})
+                if content:
+                    content += '<br />' + result['content']['$t']
+                else:
+                    content = result['content']['$t']
 
+            results.append({'url': url,
+                            'title': title,
+                            'content': content,
+                            'template': 'videos.html',
+                            'publishedDate': publishedDate,
+                            'thumbnail': thumbnail})
+    except:
+        return []
     return results

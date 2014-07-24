@@ -60,4 +60,12 @@ def search(request):
     cleanInformation(dataGoogle)
     cleanInformation(dataYahoo)
     cleanInformation(dataBing)
-    return result.parseResponse(dataGoogle, dataYahoo, dataBing)
+    result_data = result.parseResponse(dataGoogle, dataYahoo, dataBing)
+    final_result = []
+    for i in result_data:
+        current_dict = {}
+        current_dict["url"] = i.url
+        current_dict["title"] = i.title
+        current_dict["content"] = i.content
+        final_result.append(current_dict)
+    return final_result

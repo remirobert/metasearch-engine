@@ -48,11 +48,10 @@ def search_video(request):
     finalData = []
     dataYoutube =  youtube_search(request)
     dataDailymotion = dailymotion_search(request)
+
     for i in dataYoutube:
         finalData.append(i)
     for i in range(0, 5):
         if i < len(dataDailymotion):
             finalData.append(dataDailymotion[i])
-
-    print finalData
     return finalData

@@ -1,0 +1,32 @@
+import sqlite3
+import os
+
+def create_database():
+    conn = sqlite3.connect("database.sql")
+    conn.cursor().execute('''CREATE TABLE keyword (id INTEGER NOT NULL PRIMARY KEY, 
+    word TEXT NOT NULL, id_search INTEGER NOT NULL, id_images INTEGER NOT NULL, 
+    id_news INTEGER NOT NULL, id_videos INTEGER NOT NULL, id_torrent INTEGER NOT NULL)''')
+
+    conn.cursor().execute('''CREATE TABLE search (id INTEGER NOT NULL PRIMARY KEY,
+    url TEXT NOT NULL, title TEXT NOT NULL, content TEXT NOT NULL)''')
+
+
+    conn.close()
+    print "create database"
+
+
+def search_word(conn, request):
+    #conn.cursor().execute("SELECT * FROM keyword WHERE word=?", (request,))
+    conn.cursor().execute("SELECT * FROM keyword")
+    result_database = conn.cursor().fetchone()
+    print "print result database : ", result_database
+    conn.close()
+
+def connect_database():
+    db = os.path.exists("database.sql")
+    if db == False:
+        create_database()
+    conn = sqlite3.connect("database.sql")
+    print "connection success database"
+    print conn
+    return conn
