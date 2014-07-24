@@ -111,6 +111,7 @@ var sub_url_base = 'http://superthemes.com/';
     </div>
 
     {% if type == 1 %}
+    </br></br>
     {% for x in dataResults %}
     <div class="item active">
       <div class="row">		    
@@ -119,6 +120,71 @@ var sub_url_base = 'http://superthemes.com/';
 	    <p class="title">{{ x["title"] }}</p>
 	  </a>
 	  <p>{{ x["content"] }}</p>
+	</div>
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if type == 2 %}
+    </br></br>
+    {% for x in dataResults %}
+    <div class="item active">
+      <div class="row">		    
+	<div class="col-sm-12">
+	  <a href={{ x["img_src"] }}>
+	    <p class="title">{{ x["url"] }}</p>
+	  </a>
+	</div>
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if type == 3 %}
+    </br></br>
+    {% for x in dataResults %}
+    <div class="item active">
+      <div class="row">		    
+	<div class="col-sm-12">
+	  <a href={{ x["url"] }}>
+	    <p class="title">{{ x["title"] }}</p>
+	  </a>
+	  <p>{{ x["content"] }}</p>
+	  <p>{{ x["date"] }}</p>
+	</div>
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if type == 4 %}
+    </br></br>
+    {% for x in dataResults %}
+    <div class="item active">
+      <div class="row">		    
+	<div class="col-sm-12">
+	  <a href={{ x["url"] }}>
+	    <p class="title">{{ x["title"] }}</p>
+	  </a>
+	  <p>{{ x["content"] }}</p>
+	</div>
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if type == 5 %}
+    </br></br>
+    {% for x in dataResults %}
+    <div class="item active">
+      <div class="row">		    
+	<div class="col-sm-12">
+	  <a href={{ x["link"] }}>
+	    <p class="title">{{ x["title"] }}</p>
+	  </a>
+	  <p><strong>Url</strong> :{{ x["url"] }}</p>
+	  <p><strong>Seed</strong> :{{ x["seed"] }} <strong>Leech</strong> :{{ x["leech"] }}</p>
 	</div>
       </div>
     </div>
