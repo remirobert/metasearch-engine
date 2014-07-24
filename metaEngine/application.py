@@ -16,10 +16,60 @@ import manage_database
 app = Flask(__name__)
 conn = None
 
+@app.route('/api/torrent/<keyword>')
+def webTorrent(keyword):
+    conn = manage_database.connect_database()
+    data_ret = manage_database.search_word(conn, keyword, "torrent")
+    if data_ret == None:
+        data_ret = search_torrent(keyword)
+    conn.close()
+    if data_ret == None:
+        data_ret = []
+    return jsonify(keyword=data_ret)
+
+@app.route('/api/videos/<keyword>')
+def webVideo(keyword):
+    conn = manage_database.connect_database()
+    data_ret = manage_database.search_word(conn, keyword, "videos")
+    if data_ret == None:
+        data_ret = search_video(keyword)
+    conn.close()
+    if data_ret == None:
+        data_ret = []
+    return jsonify(keyword=data_ret)
+
+@app.route('/api/news/<keyword>')
+def webNews(keyword):
+    conn = manage_database.connect_database()
+    data_ret = manage_database.search_word(conn, keyword, "news")
+    if data_ret == None:
+        data_ret = searchNews(keyword)
+    conn.close()
+    if data_ret == None:
+        data_ret = []
+    return jsonify(keyword=data_ret)
+
+@app.route('/api/images/<keyword>')
+def webImage(keyword):
+    conn = manage_database.connect_database()
+    data_ret = manage_database.search_word(conn, keyword, "images")
+    if data_ret == None:
+        data_ret = search_image(keyword)
+    conn.close()
+    if data_ret == None:
+        data_ret = []
+    return jsonify(keyword=data_ret)
+
 @app.route('/api/web-search/<keyword>')
 def webSearch(keyword):
-    print "keyword = ", keyword
-    return jsonify(keyword=keyword)
+    conn = manage_database.connect_database()
+    data_ret = manage_database.search_word(conn, keyword, "search")
+    if data_ret == None:
+        data_ret = search(keyword)
+    conn.close()
+    if data_ret == None:
+        data_ret = []
+    return jsonify(keyword=data_ret)
 
 @app.route('/')
 def home():
