@@ -85,6 +85,8 @@ def my_form_post():
     print "adresse ip : ", request.remote_addr
     conn = manage_database.connect_database()
     manage_database.add_connection_user(conn, request.remote_addr)
+    if keyword == None or keyword == "":
+        return (render_template("index.html", type=data_type, dataResults=[]))        
     data_ret = manage_database.search_word(conn, keyword, request.form['platform'])
 
     if data_ret == None:
