@@ -7,7 +7,8 @@ def create_database():
     cursor = conn.cursor()
 
     print "creation table"
-    cursor.execute('''CREATE TABLE keyword (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT)''')
+    cursor.execute('''CREATE TABLE keyword (id INTEGER PRIMARY KEY AUTOINCREMENT, 
+    word TEXT, nb INTEGER)''')
 
     cursor.execute('''CREATE TABLE search (id INTEGER PRIMARY KEY AUTOINCREMENT,
     id_word INTEGER, url TEXT, title TEXT, content TEXT)''')
@@ -24,15 +25,29 @@ def create_database():
     cursor.execute('''CREATE TABLE torrent (id INTEGER PRIMARY KEY AUTOINCREMENT,
     id_word INTEGER, url TEXT, title TEXT, link TEXT, seed TEXT, leech TEXT)''')
 
+    cursor.execute('''CREATE TABLE client (id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ip TEXT, nb INTEGER)''')
+
     conn.commit()
     conn.close()
+
+def add_connection_user(conn, ip_address):
+    cursor = conn.cursor()
+    request_client = cursor.execute("SELECT * FROM client WHERE ip=?", (ip_address,))
+    client = request_client.fetchone()
+    if client == None:
+        cursor.execute("INSERT INTO client (ip, nb) VALUES (?, ?)", (ip_address, 1,))
+        conn.commit()
+        return 
+    cursor.execute("UPDATE client SET nb=? WHERE id=?", (client[2] + 1, client[0],))
+    conn.commit()
 
 def fill_new_entry(conn, request, search_results, 
                    image_search, news_search, videos_search, torrent_search):
     cursor = conn.cursor()
 
-    arg = (request,)
-    cursor.execute('''INSERT INTO keyword (word) VALUES(?)''', arg)
+    arg = (request, 1,)
+    cursor.execute('''INSERT INTO keyword (word, nb) VALUES(?, ?)''', arg)
     word_id = cursor.lastrowid;
     conn.commit()
     for i in search_results:
@@ -71,9 +86,8 @@ def search_word(conn, request, type_search):
     response_database = cursor.fetchone()
     if response_database == None:
         return None
-    print "find result database : ", response_database
-    print "id response : ", response_database[0]
-    
+    cursor.execute("UPDATE keyword SET nb=? WHERE word=?", (response_database[2] + 1, request,))
+    conn.commit()
     if type_search == "search":
         return manage_database_search.database_search_search(cursor, response_database[0])
     elif type_search == "images":

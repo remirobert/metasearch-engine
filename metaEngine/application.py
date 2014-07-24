@@ -82,7 +82,9 @@ def my_form_post():
     data_type = 0
     resultSearch = []
 
+    print "adresse ip : ", request.remote_addr
     conn = manage_database.connect_database()
+    manage_database.add_connection_user(conn, request.remote_addr)
     data_ret = manage_database.search_word(conn, keyword, request.form['platform'])
 
     if data_ret == None:
@@ -91,7 +93,6 @@ def my_form_post():
         news_results = searchNews(keyword)
         videos_search = search_video(keyword)
         torrent_search = search_torrent(keyword)
-        print torrent_search
         manage_database.fill_new_entry(conn, keyword, search_results, image_search, \
                                        news_results, videos_search, torrent_search)
     else:
