@@ -11,7 +11,6 @@ def database_torrent_search(cursor, id_search):
         current_dict["seed"] = i[5]
         current_dict["leech"] = i[6]
         data_search.append(current_dict)
-    print data_search
     return data_search
 
 def database_videos_search(cursor, id_search):
@@ -23,7 +22,6 @@ def database_videos_search(cursor, id_search):
         current_dict["title"] = i[3]
         current_dict["content"] = i[4]
         data_search.append(current_dict)
-    print data_search
     return data_search
 
 def database_news_search(cursor, id_search):
@@ -36,7 +34,6 @@ def database_news_search(cursor, id_search):
         current_dict["content"] = i[4]
         current_dict["date"] = i[5]
         data_search.append(current_dict)
-    print data_search
     return data_search
 
 def database_images_search(cursor, id_search):
@@ -47,7 +44,6 @@ def database_images_search(cursor, id_search):
         current_dict["url"] = i[2]
         current_dict["img_src"] = i[3]
         data_search.append(current_dict)
-    print data_search
     return data_search
 
 def database_search_search(cursor, id_search):    
@@ -59,5 +55,4 @@ def database_search_search(cursor, id_search):
         current_dict["title"] = i[3]
         current_dict["content"] = i[4]
         data_search.append(current_dict)
-    print data_search
     return data_search
