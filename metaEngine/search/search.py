@@ -16,38 +16,38 @@ def defaultParameter():
             'cookies': {}, 'language':'all'}
 
 def googleSearch(request):
-    data = None
+    data = []
     param = defaultParameter()
     param['pageno'] = 0
     try:
         ret = google.request(request, param)
         r = requests.get(ret['url'])
     except:
-        return None
+        return []
     data = google.response(r)
     return data
 
 def yahooSearch(request):
-    data = None
+    data = []
     param = defaultParameter()
     param['pageno'] = 10
     try:
         ret = yahoo.request(request, param)
         r = requests.get(ret['url'])
     except:
-        return None
+        return []
     data = yahoo.response(r)
     return data
 
 def bingSearch(request):
-    data = None
+    data = []
     param = defaultParameter()
     ret = bing.request(request, param)
     try:
         r = requests.get(ret['url'])
         r.headers['content-type']
     except:
-        return None
+        return []
     data = bing.response(r)
     return data
 

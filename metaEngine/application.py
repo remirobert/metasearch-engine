@@ -16,6 +16,7 @@ import signal
 import threading
 import subprocess
 import robot
+import optimise_request
 
 app = Flask(__name__)
 conn = None
@@ -87,12 +88,23 @@ def home():
     print "call here"
     return (render_template("index.html", type=0, dataResults=[]))
 
+def get_id_type(request):
+    tab = ["search", "images", "news", "videos", "torrent"]
+    index = 1
+
+    for i in tab:
+        if i == request:
+            return index
+        index += 1
+    return index
+
 @app.route('/', methods=['POST'])
 def my_form_post():
     keyword = request.form['text']
     keyword = keyword.upper().lower()
-    data_type = 0
+    data_type = get_id_type(request.form['platform'])
     resultSearch = []
+    start_download = False
 
     print "adresse ip : ", request.remote_addr
     conn = manage_database.connect_database()
@@ -103,6 +115,8 @@ def my_form_post():
     data_ret = manage_database.search_word(conn, keyword, request.form['platform'])
 
     if data_ret == None:
+        start_download = True
+        """
         search_results = search(keyword)
         image_search = search_image(keyword)
         news_results = searchNews(keyword)
@@ -110,30 +124,31 @@ def my_form_post():
         torrent_search = search_torrent(keyword)
         manage_database.fill_new_entry(conn, keyword, search_results, image_search, \
                                        news_results, videos_search, torrent_search)
+        """
     else:
         resultSearch = data_ret
 
-    conn.close()
+    thread_download = threading.Thread(target=optimise_request.download, args=(keyword,))
     if request.form['platform'] == "search":
         if data_ret == None:
-            resultSearch = search_results
-        data_type = 1
+            resultSearch = search(keyword)
     elif request.form['platform'] == "images":
         if data_ret == None:
-            resultSearch = image_search
-        data_type = 2    
+            resultSearch = search_image(keyword)
     elif request.form['platform'] == "news":
         if data_ret == None:
-            resultSearch = news_results
-        data_type = 3
+            resultSearch = searchNews(keyword)
     elif request.form['platform'] == "videos":
         if data_ret == None:
-            resultSearch = videos_search
-        data_type = 4
+            resultSearch = search_video(keyword)
     elif request.form['platform'] == "torrent":
         if data_ret == None:
-            resultSearch = torrent_search
-        data_type = 5
+            resultSearch = search_torrent(keyword)
+
+    if start_download == True:
+        thread_download.start()
+
+    conn.close()
 
     if resultSearch != None:
         return (render_template("index.html", type=data_type, dataResults=resultSearch))

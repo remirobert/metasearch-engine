@@ -49,7 +49,10 @@ def fill_new_entry(conn, request, search_results,
     arg = (request, 1,)
     cursor.execute('''INSERT INTO keyword (word, nb) VALUES(?, ?)''', arg)
     word_id = cursor.lastrowid;
-    conn.commit()
+    try:
+        conn.commit()
+    except:
+        return
     for i in search_results:
         arg = (word_id, i["url"], i["title"], i["content"],)
         cursor.execute('''INSERT INTO search (id_word, url, title, content) 
