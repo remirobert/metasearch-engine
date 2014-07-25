@@ -2,7 +2,6 @@ import sys
 import requests
 sys.path.append("engine/")
 import result
-import vimeo
 import dailymotion
 import youtube
 from search_news import searchNews
