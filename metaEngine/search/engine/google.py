@@ -26,7 +26,9 @@ def request(query, params):
 def response(resp):
     results = []
     search_res = loads(resp.text)
-    
+
+    if search_res == None or search_res.get('responseData', {}) == None:
+        return []
     if not search_res.get('responseData', {}).get('results'):
         return []
 

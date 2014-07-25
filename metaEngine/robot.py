@@ -19,7 +19,9 @@ def update_word_search(conn):
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM keyword ORDER BY nb DESC")
     for i in cursor.fetchall():
-        print "update : ", i[1]
+        print "current row :", i
+    print "\n"
+    for i in cursor.fetchall():
         update_result_search(conn, i[1])
 
 def run_robot():
