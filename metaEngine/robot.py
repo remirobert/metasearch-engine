@@ -14,8 +14,11 @@ def update_result_search(conn, keyword):
     videos_search = search_video(keyword)
     torrent_search = search_torrent(keyword)
     print search_results
-    manage_database.fill_new_entry(conn, keyword, search_results, image_search, \
-                                   news_results, videos_search, torrent_search)
+    manage_database.update_row(conn, keyword, search_results, image_search,\
+                               news_results, videos_search, torrent_search)
+
+    #manage_database.fill_new_entry(conn, keyword, search_results, image_search, \
+     #                              news_results, videos_search, torrent_search)
 
 def update_word_search(conn):
     cursor = conn.cursor()

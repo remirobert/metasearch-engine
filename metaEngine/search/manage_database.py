@@ -42,6 +42,70 @@ def add_connection_user(conn, ip_address):
     cursor.execute("UPDATE client SET nb=? WHERE id=?", (client[2] + 1, client[0],))
     conn.commit()
 
+def update_row(conn, request, search_results,
+               image_search, news_search, videos_search, torrent_search):
+    cursor = conn.cursor()
+
+    id_word = cursor.execute("SELECT * FROM keyword WHERE word=?", (request,)).fetchone()
+    if id_word == None:
+        return
+    print "id current cursor ,", cursor.lastrowid, " other data ", id_word[0]
+    id_search = cursor.execute("SELECT * FROM search WHERE id_word=?", (id_word[0],))
+    id_search = id_search.fetchall()
+    if id_search != None:
+        index = 0
+        for i in id_search:
+            if index < len(search_results):
+                cursor.execute("UPDATE search SET url=?, title=?, content=? WHERE id=?",\
+                               (search_results[index]["url"], search_results[index]["title"], \
+                                search_results[index]["content"], i[0],))
+            index += 1
+    conn.commit()
+    id_search = cursor.execute("SELECT * FROM images WHERE id_word=?", (id_word[0],))
+    id_search = id_search.fetchall()
+    if id_search != None:
+        index = 0
+        for i in id_search:
+            if index < len(image_search):
+                cursor.execute("UPDATE images SET url=?, img_src=? WHERE id=?",\
+                               (image_search[index]["url"], image_search[index]["img_src"], i[0],))
+            index += 1
+    conn.commit()
+    id_search = cursor.execute("SELECT * FROM news WHERE id_word=?", (id_word[0],))
+    id_search = id_search.fetchall()
+    if id_search != None:
+        index = 0
+        for i in id_search:
+            if index < len(news_search):
+                cursor.execute("UPDATE news SET url=?, title=?, content=?, date=? WHERE id=?",\
+                               (news_search[index]["url"], news_search[index]["title"],\
+                                news_search[index]["content"], news_search[index]["date"], i[0],))
+            index += 1
+    conn.commit()
+    id_search = cursor.execute("SELECT * FROM videos WHERE id_word=?", (id_word[0],))
+    id_search = id_search.fetchall()
+    if id_search != None:
+        index = 0
+        for i in id_search:
+            if index < len(videos_search):
+                cursor.execute("UPDATE videos SET url=?, title=?, content=? WHERE id=?",\
+                               (videos_search[index]["url"], videos_search[index]["title"],\
+                                videos_search[index]["content"], i[0],))
+            index += 1
+    conn.commit()
+    id_search = cursor.execute("SELECT * FROM torrent WHERE id_word=?", (id_word[0],))
+    id_search = id_search.fetchall()
+    if id_search != None:
+        index = 0
+        for i in id_search:
+            if index < len(news_search):
+                cursor.execute("UPDATE torrent SET url=?, title=?, link=?, seed=?, leech=? WHERE id=?",\
+                               (torrent_search[index]["url"], torrent_search[index]["title"],\
+                                torrent_search[index]["magnetlink"], torrent_search[index]["seed"],\
+                                torrent_search[index]["leech"], i[0],))
+            index += 1
+    conn.commit()            
+
 def fill_new_entry(conn, request, search_results, 
                    image_search, news_search, videos_search, torrent_search):
     cursor = conn.cursor()
