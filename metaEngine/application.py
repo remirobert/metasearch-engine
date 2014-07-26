@@ -23,6 +23,14 @@ conn = None
 
 robot_thread = threading.Thread(target=robot.run_robot)
 
+@app.route('/api/best')
+def webBest():
+    conn = manage_database.connect_database()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM keyword ORDER BY nb DESC LIMIT 10")
+    return jsonify(best=cursor.fetchall())
+
 @app.route('/api/torrent/<keyword>')
 def webTorrent(keyword):
     keyword = keyword.upper().lower()
@@ -105,6 +113,7 @@ def my_form_post():
     data_type = get_id_type(request.form['platform'])
     resultSearch = []
     start_download = False
+    word_id = 0
 
     print "adresse ip : ", request.remote_addr
     conn = manage_database.connect_database()
@@ -116,6 +125,10 @@ def my_form_post():
 
     if data_ret == None:
         start_download = True
+        cursor = conn.cursor()
+        cursor.execute('''INSERT INTO keyword (word, nb) VALUES(?, ?)''', (keyword, 1,))
+        word_id = cursor.lastrowid
+        conn.commit()
         """
         search_results = search(keyword)
         image_search = search_image(keyword)
@@ -128,7 +141,7 @@ def my_form_post():
     else:
         resultSearch = data_ret
 
-    thread_download = threading.Thread(target=optimise_request.download, args=(keyword,))
+    thread_download = threading.Thread(target=optimise_request.download, args=(keyword, word_id))
     if request.form['platform'] == "search":
         if data_ret == None:
             resultSearch = search(keyword)

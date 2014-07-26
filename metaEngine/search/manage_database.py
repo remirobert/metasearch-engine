@@ -107,12 +107,12 @@ def update_row(conn, request, search_results,
     conn.commit()            
 
 def fill_new_entry(conn, request, search_results, 
-                   image_search, news_search, videos_search, torrent_search):
+                   image_search, news_search, videos_search, torrent_search, word_id):
     cursor = conn.cursor()
 
-    arg = (request, 1,)
-    cursor.execute('''INSERT INTO keyword (word, nb) VALUES(?, ?)''', arg)
-    word_id = cursor.lastrowid;
+    #arg = (request, 1,)
+    #cursor.execute('''INSERT INTO keyword (word, nb) VALUES(?, ?)''', arg)
+    #word_id = cursor.lastrowid;
     try:
         conn.commit()
     except:
