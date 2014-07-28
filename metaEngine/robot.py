@@ -7,13 +7,11 @@ from search_video import search_video
 from search_torrent import search_torrent
 
 def update_result_search(conn, keyword):
-    print "update result : ", keyword
     search_results = search(keyword)
     image_search = search_image(keyword)
     news_results = searchNews(keyword)
     videos_search = search_video(keyword)
     torrent_search = search_torrent(keyword)
-    print search_results
     manage_database.update_row(conn, keyword, search_results, image_search,\
                                news_results, videos_search, torrent_search)
 
